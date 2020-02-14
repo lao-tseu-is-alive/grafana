@@ -1,0 +1,333 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 10,
+  "iteration": 1581692736392,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {
+        "Création Affaires": "orange",
+        "Création Documents": "blue",
+        "NewDocument": "blue",
+        "Nombre de nouveaux Documents": "blue"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Microsoft SQL Server",
+      "description": "",
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": false,
+        "hideZero": false,
+        "max": false,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 300,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 3,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroupAlias(DateCreated,$period,previous),\n  count(*) AS NewDocument\nFROM document\nWHERE\n  $__timeFilter(DateCreated)\nGROUP BY  $__timeGroup(DateCreated,$period,previous)\nORDER BY 1\n  ",
+          "refId": "A"
+        },
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroupAlias(DateCreated,$period,previous),\n  count(*) AS NewAffaire\nFROM dbo.Affaire\nWHERE\n  $__timeFilter(DateCreated)\nGROUP BY  $__timeGroup(DateCreated,$period,previous)\nORDER BY 1\n  ",
+          "refId": "B"
+        },
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroupAlias(DateCreated,$period,previous),\n  count(*) AS NewSuivi\nFROM dbo.AffaireSuivi\nWHERE\n  $__timeFilter(DateCreated)\nGROUP BY  $__timeGroup(DateCreated,$period,previous)\nORDER BY 1\n  ",
+          "refId": "C"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Nouveaux éléments / $period",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "cumulative"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {
+        "DocumentAcces": "blue"
+      },
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Microsoft SQL Server",
+      "decimals": null,
+      "fill": 1,
+      "fillGradient": 2,
+      "gridPos": {
+        "h": 12,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "hiddenSeries": false,
+      "id": 4,
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "max": true,
+        "min": false,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 300,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null as zero",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 3,
+      "points": true,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": true,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroupAlias(DateAcces,$period,previous),\n  count(*) AS DocumentAcces\nFROM DocumentLogAcces\nWHERE\n  $__timeFilter(DateAcces)\nGROUP BY  $__timeGroup(DateAcces,$period,previous)\nORDER BY 1",
+          "refId": "A"
+        },
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT\n  $__timeGroupAlias(DateAcces,$period,previous),\n  count(*) AS AffaireAcces\nFROM AffaireLogAcces\nWHERE\n  $__timeFilter(DateAcces)\nGROUP BY  $__timeGroup(DateAcces,$period,previous)\nORDER BY 1",
+          "refId": "B"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "Nombre Acces / $period",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "refresh": false,
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [
+    "goéland"
+  ],
+  "templating": {
+    "list": [
+      {
+        "auto": false,
+        "auto_count": 30,
+        "auto_min": "10s",
+        "current": {
+          "selected": false,
+          "text": "30m",
+          "value": "30m"
+        },
+        "hide": 0,
+        "label": "period",
+        "name": "period",
+        "options": [
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          },
+          {
+            "selected": false,
+            "text": "10m",
+            "value": "10m"
+          },
+          {
+            "selected": true,
+            "text": "30m",
+            "value": "30m"
+          },
+          {
+            "selected": false,
+            "text": "1h",
+            "value": "1h"
+          },
+          {
+            "selected": false,
+            "text": "6h",
+            "value": "6h"
+          },
+          {
+            "selected": false,
+            "text": "12h",
+            "value": "12h"
+          },
+          {
+            "selected": false,
+            "text": "1d",
+            "value": "1d"
+          },
+          {
+            "selected": false,
+            "text": "7d",
+            "value": "7d"
+          },
+          {
+            "selected": false,
+            "text": "14d",
+            "value": "14d"
+          },
+          {
+            "selected": false,
+            "text": "30d",
+            "value": "30d"
+          }
+        ],
+        "query": "5m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
+        "refresh": 2,
+        "skipUrlSync": false,
+        "type": "interval"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-12h",
+    "to": "now-1m"
+  },
+  "timepicker": {
+    "nowDelay": "1m",
+    "refresh_intervals": [
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Goéland Statistiques",
+  "uid": "rGjl5MQWk",
+  "version": 9
+}
